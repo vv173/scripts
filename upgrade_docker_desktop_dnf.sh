@@ -9,7 +9,7 @@ display_usage() {
 }
 
 # Check if script is running with sudo privileges
-if [ "$UID" -ne 0 -o "$EUID" -ne 0 ]; then
+if [ "$UID" -ne 0 ] || [ "$EUID" -ne 0 ]; then
 	echo "Error: This script must be run with sudo privileges."
 	exit 1
 fi
@@ -63,6 +63,6 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Clean up: Remove the downloaded RPM file"
-rm -f $DOCKER_DESKTOP_RPM
+rm -f "$DOCKER_DESKTOP_RPM"
 
 echo "Docker Desktop installation completed successfully!"
