@@ -18,7 +18,6 @@ RCLONE_OPTS=(
     "--log-file-max-size=10M"
     "--log-level=INFO"
     "--use-json-log"
-    "--dry-run"
 )
 
 rclone copy "${RCLONE_OPTS[@]}" "$KEEPASS_DIR" "$REMOTE_PATH"
