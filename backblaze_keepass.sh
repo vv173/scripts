@@ -4,17 +4,15 @@
 
 set -euo pipefail
 
-HOME_DIR="/home/viktorvo/"
-KEEPASS_DIR="$HOME_DIR/.keepass/"
-BUCKET_NAME=""
+KEEPASS_DIR="${HOME}/.keepass/"
 REMOTE_PATH="keepass:${BUCKET_NAME}/"
 
 RCLONE_OPTS=(
     "--checksum"
     "--human-readable"
-    "--exclude='.stfolder*'"
-    "--config=${HOME_DIR}/.config/rclone/rclone.conf"
-    "--log-file=/var/log/rclone/keepass.log"
+    "--exclude=.stfolder/*"
+    "--config=${HOME}/.config/rclone/rclone.conf"
+    "--log-file=${HOME}/.local/var/log/rclone/keepass.log"
     "--log-file-max-size=10M"
     "--log-level=INFO"
     "--use-json-log"
