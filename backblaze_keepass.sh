@@ -11,6 +11,7 @@ RCLONE_OPTS=(
     "--checksum"
     "--human-readable"
     "--exclude=.stfolder/*"
+    "--exclude=.stversions/*"
     "--config=${HOME}/.config/rclone/rclone.conf"
     "--log-file=${HOME}/.local/var/log/rclone/keepass.log"
     "--log-file-max-size=10M"
