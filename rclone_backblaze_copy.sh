@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# Back up KeePass database to Backblaze B2 using rclone.
-
 set -euo pipefail
 
-KEEPASS_DIR="${HOME}/.keepass/"
-REMOTE_PATH="keepass:${BUCKET_NAME}/"
+if [ -z "${SOURCE_DIR:-}" ] && [ -z "${REMOTE_PATH:-}" ]; then
+    echo "ERROR: SOURCE_DIR and REMOTE_PATH must be set" >&2
+    exit 1
+fi
 
 RCLONE_OPTS=(
     "--checksum"
@@ -13,10 +13,10 @@ RCLONE_OPTS=(
     "--exclude=.stfolder/*"
     "--exclude=.stversions/*"
     "--config=${HOME}/.config/rclone/rclone.conf"
-    "--log-file=${HOME}/.local/var/log/rclone/keepass.log"
+    "--log-file=${HOME}/.local/var/log/rclone/rclone-copy.log"
     "--log-file-max-size=10M"
     "--log-level=INFO"
     "--use-json-log"
 )
 
-rclone copy "${RCLONE_OPTS[@]}" "$KEEPASS_DIR" "$REMOTE_PATH"
+rclone copy "${RCLONE_OPTS[@]}" "$SOURCE_DIR" "$REMOTE_PATH"
